@@ -1,0 +1,26 @@
+{
+  "name": "i-lateral/silverstripe-reviews",
+  "description": "Expands comments module to also allow for reviewing of an object",
+    "type": "silverstripe-vendormodule",
+    "homepage": "http://github.com/i-lateral/silverstripe-reviews",
+    "keywords": ["silverstripe", "reviews", "comments"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "ilateral",
+            "email": "info@ilateral.co.uk"
+        }
+    ],
+    "support": {
+        "issues": "http://github.com/i-lateral/silverstripe-reviews/issues"
+    },
+    "require": {
+        "silverstripe/framework": "~4.0",
+        "silverstripe/comments": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ilateral\\SilverStripe\\Reviews\\": "src/"
+        }
+    }
+}
