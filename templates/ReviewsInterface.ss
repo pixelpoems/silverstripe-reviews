@@ -1,3 +1,5 @@
+<% require css('i-lateral/silverstripe-reviews:client/dist/css/reviews.min.css') %>
+
 <% if $CommentsEnabled %>
 	<div id="$CommentHolderID" class="comments-holder-container">
 		<p class="coments-ratings">{$AverageRatingStars} {$ExcessRatingStars}</p>

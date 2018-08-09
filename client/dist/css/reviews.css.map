@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AACI,2CAAiB;EACb,SAAS,EAAE,MAAM",
+"mappings": "AACI,2CAAiB;EACb,SAAS,EAAE,MAAM;EACjB,KAAK,EAAE,OAAO;AAId,qEAAG;EACC,YAAY,EAAE,CAAC;EAEf,wEAAG;IACC,OAAO,EAAE,YAAY;IACrB,UAAU,EAAE,IAAI",
 "sources": ["../../src/sass/reviews.scss"],
 "names": [],
 "file": "reviews.css"
