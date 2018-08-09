@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACI,2CAAiB;EACb,SAAS,EAAE,MAAM",
+"sources": ["../../src/sass/reviews.scss"],
+"names": [],
+"file": "reviews.css"
+}
