@@ -1,0 +1,7 @@
+---
+Name: reviewsroutes
+After: framework/routes#coreroutes
+---
+SilverStripe\Control\Director:
+  rules:
+    ssreviews: ilateral\SilverStripe\Reviews\Control\ReviewsController

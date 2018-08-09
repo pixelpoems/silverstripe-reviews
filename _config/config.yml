@@ -1,0 +1,7 @@
+---
+Name: silverstripereviews
+---
+# Add rating field to comment
+SilverStripe\Comments\Model\Comment:
+  extensions:
+    - ilateral\SilverStripe\Reviews\Extensions\CommentExtension
