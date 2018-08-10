@@ -1,5 +1,7 @@
 # silverstripe-reviews
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/i-lateral/silverstripe-reviews/badges/quality-score.png?b=1)](https://scrutinizer-ci.com/g/i-lateral/silverstripe-reviews/?branch=1)
+
 Add ability to review dataobjects by expanding on the core "comments" module
 
 This module allows you to attach a "comments form" (and thread) to an object,
