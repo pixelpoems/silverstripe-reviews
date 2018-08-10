@@ -27,5 +27,9 @@
         "psr-4": {
             "ilateral\\SilverStripe\\Reviews\\": "src/"
         }
-    }
+    },
+    "scripts": {
+        "lint": "phpcs -s src/"
+    },
+    "minimum-stability": "dev"
 }
