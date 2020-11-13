@@ -44,3 +44,7 @@ Product:
     max_rating: 5 # Maximum rating possible 
     enable_url: false # Re-show the URL field (hidden by default)
 ```
+
+**NOTE** This module extends on the functionality of the comments module, so you still need to add the template variable to your Page/Controller template:
+
+    $CommentsForm
