@@ -4,6 +4,7 @@ namespace ilateral\SilverStripe\Reviews\Extensions;
 
 use SilverStripe\ORM\DataExtension;
 use ilateral\SilverStripe\Reviews\Helpers\ReviewHelper;
+use SilverStripe\Forms\FieldList;
 
 class CommentExtension extends DataExtension
 {
@@ -15,6 +16,10 @@ class CommentExtension extends DataExtension
         'MaxRating' => 'Int',
         'RatingStars' => 'HTMLText',
         'ExcessStars' => 'HTMLText'
+    ];
+
+    private static $summary_fields = [
+        'Rating'
     ];
 
     public function getMaxRating()
@@ -52,6 +57,17 @@ class CommentExtension extends DataExtension
             $this->getOwner()->Parent()->getCommentsOption("min_rating"),
             $excess,
             $html = "&#9734;"
+        );
+    }
+
+    public function updateCMSFields(FieldList $fields)
+    {
+        /** @var \SilverStripe\Comments\Model\Comment */
+        $owner = $this->getOwner();
+
+        $fields->insertBefore(
+            'Name',
+            $owner->dbObject('Rating')->scaffoldFormField($owner->fieldLabel('Rating'))
         );
     }
 }
