@@ -14,9 +14,15 @@
     "support": {
         "issues": "http://github.com/i-lateral/silverstripe-reviews/issues"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/pixelpoems/silverstripe-comments"
+        }
+    ],
     "require": {
         "silverstripe/framework": "~4.0",
-        "silverstripe/comments": "^3.10.4"
+        "silverstripe/comments": "dev-remove-deprecation-message"
     },
     "extra": {
         "expose": [
