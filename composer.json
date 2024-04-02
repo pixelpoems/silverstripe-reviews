@@ -16,7 +16,7 @@
     },
     "require": {
         "silverstripe/framework": "~4.0",
-        "silverstripe/comments": "^3.5"
+        "silverstripe/comments": "^3.10.4"
     },
     "extra": {
         "expose": [
