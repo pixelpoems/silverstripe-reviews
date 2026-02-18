@@ -1,34 +1,37 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ilateral\SilverStripe\Reviews\Extensions;
 
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\View\Requirements;
 use SilverStripe\Control\Controller;
 use ilateral\SilverStripe\Reviews\Control\ReviewsController;
 use ilateral\SilverStripe\Reviews\Helpers\ReviewHelper;
 
-class ReviewsExtension extends DataExtension
+class ReviewsExtension extends Extension
 {
+    public $owner;
+
     /**
      * Extra configuration values (to be combined with those provided by comments)
      *
      * min_rating: The minimum value used for the ratings field
      * max_rating: The maximum value used for the ratings field
-     * disable_url:Hide the "URL" field 
+     * disable_url:Hide the "URL" field
      *
-     * @var array
      *
      * @config
      */
-    private static $comments = [
+    private static array $comments = [
         'show_ratings' => true,
         'min_rating'   => 1,
         'max_rating'   => 5,
         'enable_url'   => false
     ];
 
-    private static $casting = [
+    private static array $casting = [
         "AverageRating" => "Decimal",
         "AverageRatingStars" => "HTMLText",
         "ExcessRatingStars" => "HTMLText",
@@ -42,18 +45,18 @@ class ReviewsExtension extends DataExtension
      * 
      * @return float
      */
-    public function getAverageRating()
+    public function getAverageRating(): int|float
     {
         $comments = $this
             ->getOwner()
             ->Comments()
             ->filter("Rating:not", null);
-        
+
         $total_rating = 0;
         $total_comments = $comments->count();
 
         foreach ($comments as $comment) {
-            $total_rating = $total_rating + $comment->Rating;
+            $total_rating += $comment->Rating;
         }
 
         if ($total_rating > 0) {
@@ -66,10 +69,8 @@ class ReviewsExtension extends DataExtension
     /**
      * Get the average rating as HTML Star characters
      * (one star per increment of rating).
-     * 
-     * @return string
      */
-    public function getAverageRatingStars()
+    public function getAverageRatingStars(): string
     {
         return ReviewHelper::getStarsFromValues(
             $min = $this->getOwner()->getCommentsOption("min_rating"),
@@ -79,10 +80,8 @@ class ReviewsExtension extends DataExtension
 
     /**
      * Get the stars remaining (total minus the average)
-     * 
-     * @return string
      */
-    public function getExcessRatingStars()
+    public function getExcessRatingStars(): string
     {
         $max = $this->getOwner()->getCommentsOption("max_rating");
         $rating = $this->getOwner()->AverageRating;
@@ -126,8 +125,7 @@ class ReviewsExtension extends DataExtension
 
         // a little bit all over the show but to ensure a slightly easier upgrade for users
         // return back the same variables as previously done in comments
-        return $this
-            ->owner
+        return $this->getOwner()
             ->customise(array(
                 'AddCommentForm' => $form,
                 'ModeratedSubmitted' => $moderatedSubmitted,

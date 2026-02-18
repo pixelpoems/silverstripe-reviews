@@ -1,20 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ilateral\SilverStripe\Reviews\Control;
 
-use SilverStripe\Core\Extension;
 use SilverStripe\Control\Director;
 use SilverStripe\Control\Controller;
 use SilverStripe\Forms\OptionsetField;
 use SilverStripe\Core\Injector\Injector;
-use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Comments\Forms\CommentForm;
 use SilverStripe\Comments\Controllers\CommentingController;
 
 class ReviewsController extends CommentingController
 {
 
-    private static $allowed_actions = [
+    private static array $allowed_actions = [
         'delete',
         'spam',
         'ham',
@@ -57,11 +57,9 @@ class ReviewsController extends CommentingController
         $class = $this->getRequest()->postVar('ParentClassName');
         
         // If we dont have exact values, look to see if we are using a post
-        if ((empty($min) || empty($max)) && $id && $class) {
-            if ($object = $class::get()->byID($id)) {
-                $min = $object->getCommentsOption('min_rating');
-                $max = $object->getCommentsOption('max_rating');
-            }
+        if ((empty($min) || empty($max)) && $id && $class && $object = $class::get()->byID($id)) {
+            $min = $object->getCommentsOption('min_rating');
+            $max = $object->getCommentsOption('max_rating');
         }
 
         // Add reviews field
@@ -73,7 +71,7 @@ class ReviewsController extends CommentingController
         // Setup possible ratings
         $ratings = [];
 
-        for ($i = $min; $i <= $max; $i++) {
+        for ($i = $min; $i <= $max; ++$i) {
             $ratings[$i] = $i;
         }
 

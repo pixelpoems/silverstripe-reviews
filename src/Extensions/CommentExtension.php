@@ -1,24 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ilateral\SilverStripe\Reviews\Extensions;
 
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
+use SilverStripe\Comments\Model\Comment;
 use ilateral\SilverStripe\Reviews\Helpers\ReviewHelper;
 use SilverStripe\Forms\FieldList;
 
-class CommentExtension extends DataExtension
+class CommentExtension extends Extension
 {
-    private static $db = [
+    private static array $db = [
         'Rating' => 'Int'
     ];
 
-    private static $casting = [
+    private static array $casting = [
         'MaxRating' => 'Int',
         'RatingStars' => 'HTMLText',
         'ExcessStars' => 'HTMLText'
     ];
 
-    private static $summary_fields = [
+    private static array $summary_fields = [
         'Rating'
     ];
 
@@ -30,10 +33,8 @@ class CommentExtension extends DataExtension
     /**
      * Get the rating as HTML Star characters
      * (one star per increment of rating).
-     * 
-     * @return string
      */
-    public function getRatingStars()
+    public function getRatingStars(): string
     {
         return ReviewHelper::getStarsFromValues(
             $this->getOwner()->Parent()->getCommentsOption('min_rating'),
@@ -44,10 +45,8 @@ class CommentExtension extends DataExtension
     /**
      * Get the excess rating as HTML Star characters
      * (one star per increment of rating).
-     * 
-     * @return string
      */
-    public function getExcessStars()
+    public function getExcessStars(): string
     {
         $max = $this->getOwner()->Parent()->getCommentsOption("max_rating");
         $rating = $this->getOwner()->Rating;
@@ -60,9 +59,9 @@ class CommentExtension extends DataExtension
         );
     }
 
-    public function updateCMSFields(FieldList $fields)
+    public function updateCMSFields(FieldList $fields): void
     {
-        /** @var \SilverStripe\Comments\Model\Comment */
+        /** @var Comment */
         $owner = $this->getOwner();
 
         $fields->insertBefore(
